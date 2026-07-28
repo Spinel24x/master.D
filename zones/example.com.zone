@@ -1,0 +1,36 @@
+; example.com — sample zone served by master-dns-core
+$ORIGIN example.com.
+$TTL 3600
+
+@   IN SOA ns1.example.com. hostmaster.example.com. (
+        2026072801 ; serial (YYYYMMDDnn)
+        7200       ; refresh
+        3600       ; retry
+        1209600    ; expire
+        300 )      ; minimum / negative-answer TTL
+
+; --- delegation ------------------------------------------------------
+@       IN NS    ns1
+@       IN NS    ns2
+ns1     IN A     192.0.2.53
+ns2     IN A     198.51.100.53
+
+; --- hosts -----------------------------------------------------------
+@       IN A     192.0.2.10
+@       IN AAAA  2001:db8::10
+api     IN A     192.0.2.20
+        IN AAAA  2001:db8::20     ; owner inherited from the line above (api)
+mail    IN A     192.0.2.25
+
+; --- aliases ---------------------------------------------------------
+www     IN CNAME @
+ftp     IN CNAME www
+
+; --- mail & text -----------------------------------------------------
+@       IN MX    10 mail
+@       IN MX    20 backup.mail.example.net.
+@       IN TXT   "v=spf1 mx -all"
+info    IN TXT   "master-dns-core" "pure python authoritative DNS"
+
+; --- wildcard --------------------------------------------------------
+*.dev   IN A     192.0.2.99

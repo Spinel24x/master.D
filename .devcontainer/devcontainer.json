@@ -1,0 +1,16 @@
+{
+  "name": "master-dns-core",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "postCreateCommand": "sudo apt-get update -y && sudo apt-get install -y dnsutils",
+  "forwardPorts": [5353],
+  "portsAttributes": {
+    "5353": {
+      "label": "DNS (TCP only — Codespaces cannot forward UDP; test with dig inside the codespace)"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python"]
+    }
+  }
+}

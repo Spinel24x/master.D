@@ -1,0 +1,12 @@
+; reverse zone for 192.0.2.0/24 — PTR demo
+$ORIGIN 2.0.192.in-addr.arpa.
+$TTL 3600
+
+@   IN SOA ns1.example.com. hostmaster.example.com. (
+        2026072801 7200 3600 1209600 300 )
+
+@       IN NS    ns1.example.com.
+10      IN PTR   example.com.
+20      IN PTR   api.example.com.
+25      IN PTR   mail.example.com.
+53      IN PTR   ns1.example.com.
